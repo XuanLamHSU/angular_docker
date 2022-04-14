@@ -1,4 +1,4 @@
-FROM node:14.8.0-stretch-slim as build-env
+FROM node:latest as build-env
 WORKDIR /app
 COPY . /app
 RUN npm install && npm run build
