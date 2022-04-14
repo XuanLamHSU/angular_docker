@@ -1,7 +1,7 @@
 FROM node:latest as build-env
 WORKDIR /app
 COPY . /app
-RUN npm install && npm run build
+RUN npm install &&  npm install source-map-resolve && npm run build
 
 FROM nginx:latest
 COPY default.conf.template /etc/nginx/conf.d/default.conf.template
