@@ -1,12 +1,24 @@
-run this command to pull jenkins images from jenkins office
-docker pull jenkins/jenkins
-run this o build jenkins container.
-docker run -v  /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v /home/xuanlam/data_jenkins:/var/jenkins_home -p 8080:8080 --user 1000:999 --name jenkins_server -d jenkins/jenkins:lts
-
-//
+## this is document for build and run jenkins on docker
+## first [install_docker]
+[requirement]
+## git
+## install docker engine
+open console
+Run `git clone https://github.com/docker/docker-install.git`
+`cd docker-install `
+`sudo bash install.sh`
+`sudo usermode -aG docker "user"`
+## loguot and relogin
+## pull jenkin images from jenkins office
+`docker pull jenkins/jenkins:lts`
+## create folder for backup data from jenkins
+`mkdir data_jenkins`
+`cd data_jenkins`
+`docker run -v  /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker -v pwd:/var/jenkins_home -p 8080:8080 --user 1000:999 --name jenkins_server -d jenkins/jenkins:lts`
+## description
 -v  /var/run/docker.sock:/var/run/docker.sock --> map volume docker from linux  to jenkins container
 -v /usr/bin/docker:/usr/bin/docker --> map volume
--v /home/xuanlam/data_jenkins:/var/jenkins_home --> map volume to backup data_jenkins
+-v pwd:/var/jenkins_home --> map volume to backup data_jenkins
 -p 8080:8080  map port 8080 on local host  8080 jenkins container
 may be add -p 50000:50000 for cluser jenkins_server (muliple jenkins_server)
 --user 1000:999  --> use "id" on linux to see number of user and docker group
