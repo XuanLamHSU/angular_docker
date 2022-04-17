@@ -1,0 +1,21 @@
+pipeline {
+  agent none
+  environment {
+    DOCKER_IMAGE = "lxlam/angular_docker"
+  }
+}
+stages {
+  stage('test') {
+      agent{
+        docker {
+          image 'node:latest'
+          args '-u 0:0'
+        }
+      }
+      steps {
+        sh "npm install"
+        sh "npm install source-map-resolve"
+        sh "npm run build"
+      }
+  }
+}
